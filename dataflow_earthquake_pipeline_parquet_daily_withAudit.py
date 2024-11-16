@@ -285,14 +285,14 @@ def audit_event(bigquery_audit_tbl,job_id, pipeline_nm,start_time, task_name, en
 
     errors = client.insert_rows_json(table_id, rows_to_insert)
     if errors:
-        print("Errors occurred while inserting audit record:", errors)
+        logging.info("Errors occurred while inserting audit record:", errors)
     else:
-        print("Audit record inserted successfully")
+        logging.info("Audit record inserted successfully")
 
 
 
 if __name__ == '__main__':
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"D:\Mohini Data Science\earthquake_ingestion_dataflow_dev\spark-learning-43150-3d588125392c.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"D:\Mohini Data Science\FN_earthquake_ingestion_dataflow_parquet_dev\spark-learning-43150-3d588125392c.json"
     option_obj = PipelineOptions()
     google_cloud = option_obj.view_as(GoogleCloudOptions)
     google_cloud.project = 'spark-learning-43150'
@@ -348,7 +348,6 @@ if __name__ == '__main__':
             end_time = datetime.utcnow()
             status='success'
             error_msg=None
-
             logging.info("pipeline1 get execuated sucessfully")
         except Exception as e :
             error_msg=e
